@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:80'
+    networks:
+      - app-net
+    restart: always
+
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/myapp
+    depends_on:
+      - mongo
+    networks:
+      - app-net
+    restart: always
+
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-net
+    restart: always
+sonarqube:
+    image: sonarqube:latest
+    ports:
+      - '9000:9000'
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    networks:
+      - app-net
+    restart: always
+    nginx:
+    image: nginx:alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-net
+    restart: always
