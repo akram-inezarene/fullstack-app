@@ -21,8 +21,8 @@ pipeline {
                   unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip
                   mv sonar-scanner-5.0.1.3006-linux sonar-scanner
                   pwd
-                  echo ${SCANNER_HOME}
-                  ${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=fullstack-app
+                  ./sonar-scanner/bin/sonar-scanner -v
+                  ./sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=fullstack-app
                   '''
           }
       }
