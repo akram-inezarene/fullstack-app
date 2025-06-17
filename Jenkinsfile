@@ -16,7 +16,11 @@ pipeline {
       agent any
       steps{
           withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
-            sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=fullstack-app"
+            sh '''
+                  pwd
+                  echo ${SCANNER_HOME}
+                  ${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=fullstack-app
+                  '''
           }
       }
     }
