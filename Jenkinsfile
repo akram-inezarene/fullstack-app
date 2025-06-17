@@ -3,6 +3,7 @@ pipeline {
   environment {
     IMAGE_NAME = 'akraminezarene/fullstack-app'
     IMAGE_TAG = "${IMAGE_NAME}:${BUILD_NUMBER}"
+    SCANNER_HOME = tool 'sonar'
   }
 
   stages {
@@ -14,8 +15,8 @@ pipeline {
     stage('code analysing using sonarqube') {
       agent any
       steps{
-          withSonarQubeEnv('sonar') {
-            sh'sonar-scanner -Dsonar.projectKey=fullstack-app'
+          withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
+            sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=fullstack-app"
           }
       }
     }
