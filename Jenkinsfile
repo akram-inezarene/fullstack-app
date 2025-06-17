@@ -14,7 +14,7 @@ pipeline {
     stage('code analysing using sonarqube') {
       agent any
       steps{
-          withSonarQubeEnv('SonarQube') {
+          withSonarQubeEnv('sonar') {
             sh'sonar-scanner -Dsonar.projectKey=fullstack-app'
           }
       }
