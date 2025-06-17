@@ -17,6 +17,9 @@ pipeline {
       steps{
           withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
             sh '''
+                  wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+                  unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip
+                  mv sonar-scanner-5.0.1.3006-linux sonar-scanner
                   pwd
                   echo ${SCANNER_HOME}
                   ${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=fullstack-app
