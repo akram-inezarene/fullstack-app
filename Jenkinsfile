@@ -18,12 +18,14 @@ pipeline {
           withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'SonarQube') {
             sh '''
                   wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-                  unzip -q sonar-scanner-cli-5.0.1.3006-linux.zip
+                  unzip -o -q sonar-scanner-cli-5.0.1.3006-linux.zip
                   mv sonar-scanner-5.0.1.3006-linux sonar-scanner
-                  pwd
-                  ./sonar-scanner/bin/sonar-scanner -v
-                  ./sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=fullstack-app
-                  '''
+                  
+                  ./sonar-scanner/bin/sonar-scanner \
+                  -Dsonar.projectKey=fullstack-app \
+                  -Dsonar.sources=. \
+                  -Dsonar.host.url=$SONAR_HOST_URL \
+                  -Dsonar.login=$SONAR_AUTH_TOKEN
           }
       }
     }
