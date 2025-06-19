@@ -23,7 +23,7 @@ pipeline {
                   mv sonar-scanner-5.0.1.3006-linux sonar-scanner
                   
                   ./sonar-scanner/bin/sonar-scanner \
-                  -Dsonar.exclusions=**/sonar-scanner/**,**/*.zip
+                  -Dsonar.exclusions=**/sonar-scanner/**,**/*.zip \
                   -Dsonar.projectKey=fullstack-app \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=$SONAR_HOST_URL \
