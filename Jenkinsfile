@@ -27,7 +27,7 @@ pipeline {
                   -Dsonar.projectKey=fullstack-app \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=$SONAR_HOST_URL \
-                  -Dsonar.login=$SONAR_AUTH_TOKEN
+                  -Dsonar.login=sqp_171d91248da1651b927ede092ec1b1b4f5db2925
                '''   
           }
       }
